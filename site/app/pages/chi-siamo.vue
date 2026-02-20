@@ -44,9 +44,8 @@
             </p>
           </div>
           <div class="story-visual">
-            <div class="story-image-placeholder">
-              <span>🏛️</span>
-              <p>Studio Dalla Torre</p>
+            <div class="story-logo-box">
+              <img src="/logo.svg" alt="Studio Dalla Torre" class="story-logo" />
             </div>
           </div>
         </div>
@@ -269,25 +268,21 @@ const values = [
   margin-bottom: 1rem;
 }
 
-.story-image-placeholder {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+.story-logo-box {
+  background: var(--color-primary-light);
   border-radius: var(--radius);
   aspect-ratio: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--color-white);
   box-shadow: var(--shadow-lg);
+  padding: 3rem;
 }
 
-.story-image-placeholder span {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-}
-
-.story-image-placeholder p {
-  color: rgba(255, 255, 255, 0.8);
+.story-logo {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
 }
 
 /* TEAM CARDS */

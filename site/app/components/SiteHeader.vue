@@ -2,7 +2,7 @@
   <header class="site-header" :class="{ scrolled: isScrolled, 'menu-open': menuOpen }">
     <div class="container header-inner">
       <NuxtLink to="/" class="logo" aria-label="Studio Dalla Torre - Homepage">
-        <span class="logo-icon">🦴</span>
+        <img src="/logo.svg" alt="Studio Dalla Torre" class="logo-img" />
         <span class="logo-text">
           <strong>Studio Dalla Torre</strong>
           <small>Osteopatia</small>
@@ -100,8 +100,10 @@ function handleScroll() {
   color: var(--color-text);
 }
 
-.logo-icon {
-  font-size: 1.6rem;
+.logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
 }
 
 .logo-text {

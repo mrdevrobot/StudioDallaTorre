@@ -4,7 +4,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-logo">
-            <span class="logo-icon">🦴</span>
+            <img src="/logo-white.svg" alt="Studio Dalla Torre" class="footer-logo-img" />
             <span>
               <strong>Studio Dalla Torre</strong>
               <small>Osteopatia</small>
@@ -91,8 +91,10 @@ const currentYear = new Date().getFullYear()
   color: var(--color-white);
 }
 
-.footer-logo .logo-icon {
-  font-size: 1.5rem;
+.footer-logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
 .footer-logo strong {

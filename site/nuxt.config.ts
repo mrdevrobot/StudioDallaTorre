@@ -28,7 +28,7 @@ export default defineNuxtConfig({
           content:
             'Studio Dalla Torre: centro di osteopatia a San Donà di Piave. Trattamenti osteopatici, ginnastica posturale e riabilitazione con Martina e Leonardo Dalla Torre.',
         },
-        { name: 'theme-color', content: '#1a7abf' },
+        { name: 'theme-color', content: '#0d64ab' },
         { property: 'og:type', content: 'website' },
         { property: 'og:locale', content: 'it_IT' },
         {

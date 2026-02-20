@@ -64,7 +64,7 @@
                 </li>
               </ul>
             </div>
-            <NuxtLink to="/contatti" class="btn btn--primary">Prenota questo servizio</NuxtLink>
+            <button class="btn btn--primary" @click="openModal(service)">Prenota questo servizio</button>
           </div>
           <div class="service-block__visual">
             <div class="service-image-placeholder">
@@ -93,6 +93,94 @@
         </div>
       </div>
     </section>
+
+    <!-- MODAL PRENOTAZIONE -->
+    <Teleport to="body">
+      <Transition name="modal">
+        <div v-if="modalService" class="modal-backdrop" @click.self="closeModal">
+          <div class="modal" role="dialog" :aria-label="`Prenota ${modalService.title}`">
+            <button class="modal__close" @click="closeModal" aria-label="Chiudi">&times;</button>
+
+            <div class="modal__header">
+              <span class="modal__icon">{{ modalService.icon }}</span>
+              <div>
+                <p class="modal__label">Stai prenotando</p>
+                <h3 class="modal__title">{{ modalService.title }}</h3>
+              </div>
+            </div>
+
+            <div class="modal__body">
+              <!-- Q1 -->
+              <div class="modal-question">
+                <p class="modal-question__label">È la tua prima visita con noi?</p>
+                <div class="modal-options">
+                  <button
+                    v-for="opt in visitTypeOptions"
+                    :key="opt.value"
+                    class="modal-option"
+                    :class="{ active: modalForm.visitType === opt.value }"
+                    @click="modalForm.visitType = opt.value"
+                  >
+                    <span>{{ opt.icon }}</span> {{ opt.label }}
+                  </button>
+                </div>
+              </div>
+
+              <!-- Q2 -->
+              <div class="modal-question">
+                <p class="modal-question__label">Con quale urgenza?</p>
+                <div class="modal-options">
+                  <button
+                    v-for="opt in urgencyOptions"
+                    :key="opt.value"
+                    class="modal-option"
+                    :class="{ active: modalForm.urgency === opt.value }"
+                    @click="modalForm.urgency = opt.value"
+                  >
+                    <span>{{ opt.icon }}</span> {{ opt.label }}
+                  </button>
+                </div>
+              </div>
+
+              <!-- Q3 -->
+              <div class="modal-question">
+                <p class="modal-question__label">Vuoi aggiungere qualcosa? <span class="optional">(facoltativo)</span></p>
+                <textarea
+                  v-model="modalForm.note"
+                  class="modal-textarea"
+                  rows="3"
+                  placeholder="Es. ho dolore da 3 settimane alla spalla destra..."
+                />
+              </div>
+            </div>
+
+            <div class="modal__footer">
+              <button class="btn btn--secondary" @click="closeModal">Annulla</button>
+              <div class="modal__cta">
+                <button
+                  class="btn btn--primary"
+                  :disabled="!modalForm.visitType || !modalForm.urgency"
+                  @click="submitModal"
+                >
+                  📋 Compila il form
+                </button>
+                <a
+                  :href="modalWaLink"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn--wa"
+                  :class="{ disabled: !modalForm.visitType || !modalForm.urgency }"
+                  @click.prevent="submitViaWhatsApp"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
@@ -261,14 +349,230 @@ const services = [
     ],
   },
 ]
+
+// ---------- MODAL ----------
+const modalService = ref<typeof services[0] | null>(null)
+const modalForm = reactive({ visitType: '', urgency: '', note: '' })
+
+const visitTypeOptions = [
+  { value: 'prima-visita', icon: '✨', label: 'Prima visita' },
+  { value: 'follow-up', icon: '🔄', label: 'Visita di controllo' },
+  { value: 'non-so', icon: '🤔', label: 'Non so ancora' },
+]
+
+const urgencyOptions = [
+  { value: 'urgente', icon: '🔴', label: 'Ho dolore / urgente' },
+  { value: 'presto', icon: '🟡', label: 'Entro qualche settimana' },
+  { value: 'pianificazione', icon: '🟢', label: 'Con calma / prevenzione' },
+]
+
+function openModal(service: typeof services[0]) {
+  modalService.value = service
+  modalForm.visitType = ''
+  modalForm.urgency = ''
+  modalForm.note = ''
+  document.body.style.overflow = 'hidden'
+}
+
+function closeModal() {
+  modalService.value = null
+  document.body.style.overflow = ''
+}
+
+function submitModal() {
+  if (!modalService.value) return
+  const svc = modalService.value
+  const vLabel = visitTypeOptions.find(o => o.value === modalForm.visitType)?.label ?? ''
+  const uLabel = urgencyOptions.find(o => o.value === modalForm.urgency)?.label ?? ''
+  const lines = [
+    `Servizio richiesto: ${svc.title}`,
+    `Tipo di visita: ${vLabel}`,
+    `Urgenza: ${uLabel}`,
+  ]
+  if (modalForm.note.trim()) lines.push(`Note: ${modalForm.note.trim()}`)
+  const message = lines.join('\n')
+  closeModal()
+  navigateTo({
+    path: '/contatti',
+    query: {
+      from: 'servizi',
+      subject: svc.id,
+      service: svc.title,
+      message,
+    },
+  })
+}
+
+const { buildLink, buildServiceMessage } = useWhatsApp()
+const modalWaLink = computed(() => {
+  if (!modalService.value || !modalForm.visitType || !modalForm.urgency) return '#'
+  const vLabel = visitTypeOptions.find(o => o.value === modalForm.visitType)?.label ?? ''
+  const uLabel = urgencyOptions.find(o => o.value === modalForm.urgency)?.label ?? ''
+  return buildLink(buildServiceMessage({
+    serviceName: modalService.value.title,
+    visitType: vLabel,
+    urgency: uLabel,
+    note: modalForm.note || undefined,
+  }))
+})
+
+function submitViaWhatsApp() {
+  if (!modalForm.visitType || !modalForm.urgency) return
+  window.open(modalWaLink.value, '_blank', 'noopener,noreferrer')
+  closeModal()
+}
 </script>
 
 <style scoped>
+/* MODAL */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modal {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-text-light);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+}
+.modal__close:hover { background: var(--color-bg-alt); }
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.75rem 1.75rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.modal__icon { font-size: 2.2rem; }
+.modal__label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-primary); font-weight: 600; margin: 0 0 0.2rem; }
+.modal__title { font-size: 1.2rem; font-weight: 700; font-family: var(--font-heading); margin: 0; color: var(--color-text); }
+
+.modal__body { padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+.modal-question__label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+}
+.optional { font-weight: 400; color: var(--color-text-light); }
+
+.modal-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.modal-option {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  color: var(--color-text);
+}
+.modal-option:hover { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-light); }
+.modal-option.active { border-color: var(--color-primary); background: var(--color-primary); color: var(--color-white); }
+
+.modal-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--color-text);
+  resize: vertical;
+  transition: border-color var(--transition);
+  background: var(--color-bg);
+}
+.modal-textarea:focus { outline: none; border-color: var(--color-primary); }
+
+.modal__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1.25rem 1.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.modal__cta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn--wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.85rem 1.4rem;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition);
+}
+.btn--wa:hover { background: #1ebe5d; color: white; transform: translateY(-2px); }
+.btn--wa.disabled { opacity: 0.45; pointer-events: none; }
+
+.modal__footer .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Transition */
+.modal-enter-active, .modal-leave-active { transition: opacity 0.2s ease; }
+.modal-enter-from, .modal-leave-to { opacity: 0; }
+.modal-enter-active .modal, .modal-leave-active .modal { transition: transform 0.25s ease; }
+.modal-enter-from .modal { transform: translateY(20px) scale(0.97); }
+.modal-leave-to .modal { transform: translateY(10px) scale(0.97); }
+
 .page-hero {
   padding: 8rem 0 3rem;
   background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-bg) 100%);
 }
-
 .page-hero h1 { max-width: 700px; margin-bottom: 1rem; }
 .page-hero__subtitle { max-width: 640px; font-size: 1.1rem; line-height: 1.8; }
 

@@ -100,6 +100,28 @@
               <NuxtLink to="/trova-il-tuo-percorso" class="quiz-prefill-banner__redo">Rifare il test →</NuxtLink>
             </div>
 
+            <!-- BANNER SCENARI -->
+            <div class="quiz-prefill-banner" v-if="fromScenari">
+              <div class="quiz-prefill-banner__icon">📍</div>
+              <div class="quiz-prefill-banner__content">
+                <strong>Modulo pre-compilato dalla guida trattamenti</strong>
+                <p v-if="scenarioTitle">Situazione selezionata: <em>{{ scenarioTitle }}</em>.</p>
+                <p v-else>Il modulo è stato pre-compilato con la tua situazione.</p>
+              </div>
+              <NuxtLink to="/trattamenti" class="quiz-prefill-banner__redo">Torna alla guida →</NuxtLink>
+            </div>
+
+            <!-- BANNER SERVIZI -->
+            <div class="quiz-prefill-banner" v-if="fromServizi">
+              <div class="quiz-prefill-banner__icon">📋</div>
+              <div class="quiz-prefill-banner__content">
+                <strong>Modulo pre-compilato dalla pagina servizi</strong>
+                <p v-if="serviziServiceLabel">Servizio selezionato: <em>{{ serviziServiceLabel }}</em>. Il messaggio contiene le tue preferenze.</p>
+                <p v-else>Il modulo è stato pre-compilato con il servizio scelto.</p>
+              </div>
+              <NuxtLink to="/servizi" class="quiz-prefill-banner__redo">Torna ai servizi →</NuxtLink>
+            </div>
+
             <p class="form-intro">
               Compila il modulo per prenotare un appuntamento o richiedere informazioni.
               Ti risponderemo entro 24 ore.
@@ -316,21 +338,30 @@ const isSubmitting = ref(false)
 const submitted = ref(false)
 const fromQuiz = ref(false)
 const quizTreatmentLabel = ref('')
+const fromScenari = ref(false)
+const scenarioTitle = ref('')
+const fromServizi = ref(false)
+const serviziServiceLabel = ref('')
 
 const route = useRoute()
 onMounted(() => {
   if (route.query.from === 'quiz') {
     fromQuiz.value = true
-    if (route.query.subject) {
-      form.subject = route.query.subject as string
-    }
-    if (route.query.message) {
-      form.message = route.query.message as string
-    }
-    // Extract first line with treatment name for banner display
+    if (route.query.subject) form.subject = route.query.subject as string
+    if (route.query.message) form.message = route.query.message as string
     const msg = route.query.message as string ?? ''
     const match = msg.match(/Trattamento consigliato: (.+)/)
     quizTreatmentLabel.value = match?.[1] ?? ''
+  } else if (route.query.from === 'scenari') {
+    fromScenari.value = true
+    if (route.query.subject) form.subject = route.query.subject as string
+    if (route.query.message) form.message = route.query.message as string
+    scenarioTitle.value = route.query.scenario as string ?? ''
+  } else if (route.query.from === 'servizi') {
+    fromServizi.value = true
+    if (route.query.subject) form.subject = route.query.subject as string
+    if (route.query.message) form.message = route.query.message as string
+    serviziServiceLabel.value = route.query.service as string ?? ''
   }
 })
 
@@ -415,7 +446,7 @@ async function submitForm() {
   align-items: flex-start;
   gap: 1rem;
   padding: 1rem 1.25rem;
-  background: #dff0fb;
+  background: #d4e8f8;
   border: 1px solid var(--color-primary);
   border-left: 4px solid var(--color-primary);
   border-radius: var(--radius-sm);
