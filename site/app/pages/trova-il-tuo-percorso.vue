@@ -189,7 +189,7 @@ const treatments = {
     id: 'sportiva',
     serviceId: 'osteopatia-sportiva',
     icon: '⚽',
-    title: 'Osteopatia Sportiva',
+    title: 'Osteopatia dello Sport',
     description:
       "Il tuo profilo atletico suggerisce un approccio osteopatico sportivo. Leonardo, con la sua esperienza come personal trainer e osteopata, è il riferimento ideale per gli sportivi.",
     advice:

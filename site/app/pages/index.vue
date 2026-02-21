@@ -33,11 +33,12 @@
           </div>
         </div>
         <div class="hero-visual">
-          <div class="hero-image-placeholder">
-            <div class="placeholder-content">
-              <span>🤲</span>
-              <p>Trattamento Osteopatico</p>
-            </div>
+          <div class="hero-image-wrapper">
+            <img
+              src="/images/hero.jpeg"
+              alt="Trattamento osteopatico presso Studio Dalla Torre"
+              class="hero-img"
+            />
           </div>
         </div>
       </div>
@@ -255,7 +256,7 @@ const services = [
   },
   {
     icon: '⚽',
-    title: 'Osteopatia Sportiva',
+    title: 'Osteopatia dello Sport',
     description:
       'Prevenzione e recupero da infortuni sportivi. Ottimizzazione della performance atletica attraverso il riequilibrio corporeo.',
     link: '/servizi#osteopatia-sportiva',
@@ -389,30 +390,18 @@ const faqs = [
   margin-top: 0.25rem;
 }
 
-.hero-image-placeholder {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+.hero-image-wrapper {
   border-radius: var(--radius);
+  overflow: hidden;
   aspect-ratio: 4 / 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: var(--shadow-lg);
 }
 
-.placeholder-content {
-  text-align: center;
-  color: var(--color-white);
-}
-
-.placeholder-content span {
-  font-size: 4rem;
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  margin-bottom: 1rem;
-}
-
-.placeholder-content p {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem;
 }
 
 /* CARD LINK */

@@ -117,7 +117,7 @@
               fisica.
             </p>
             <div class="team-card__skills">
-              <span class="skill-tag">Osteopatia Sportiva</span>
+              <span class="skill-tag">Osteopatia dello Sport</span>
               <span class="skill-tag">Personal Training</span>
               <span class="skill-tag">Preparazione Atletica</span>
               <span class="skill-tag">Biomeccanica</span>

@@ -209,7 +209,7 @@ const comparisonRows = [
     firstSession: '30–45 min',
   },
   {
-    name: 'Osteopatia Sportiva',
+    name: 'Osteopatia dello Sport',
     approach: 'Biomeccanica e trattamento infortuni',
     forWho: 'Atleti amatoriali e agonisti',
     intensity: 80,
@@ -335,7 +335,7 @@ const scenarios = [
     description:
       "Gli infortuni ricorrenti spesso nascondono compensi biomeccanici non corretti. L'analisi del gesto atletico e il trattamento osteopatico possono spezzare il ciclo.",
     recommendations: [
-      { label: '1° scelta: Osteopatia Sportiva (Leonardo)', reason: 'Analisi biomeccanica e trattamento specifico per sportivi' },
+      { label: '1° scelta: Osteopatia dello Sport (Leonardo)', reason: 'Analisi biomeccanica e trattamento specifico per sportivi' },
       { label: 'Complementare: Ginnastica Posturale', reason: 'Per correggere i pattern motori scorretti' },
     ],
   },

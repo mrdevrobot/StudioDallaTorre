@@ -67,8 +67,12 @@
             <button class="btn btn--primary" @click="openModal(service)">Prenota questo servizio</button>
           </div>
           <div class="service-block__visual">
-            <div class="service-image-placeholder">
-              <span>{{ service.icon }}</span>
+            <div class="service-image-wrapper">
+              <img
+                :src="service.image"
+                :alt="service.title"
+                class="service-img"
+              />
             </div>
           </div>
         </div>
@@ -202,6 +206,7 @@ const services = [
     category: 'Osteopatia',
     shortTitle: 'Osteopatia Strutturale',
     icon: '🦴',
+    image: '/images/servizi/strutturale.jpeg',
     title: "Osteopatia Strutturale",
     intro:
       "Il trattamento osteopatico strutturale agisce sul sistema muscolo-scheletrico per ripristinare la mobilità articolare, ridurre tensioni muscolari e alleviare il dolore.",
@@ -228,6 +233,7 @@ const services = [
     category: 'Osteopatia',
     shortTitle: 'Osteopatia Viscerale',
     icon: '🫁',
+    image: '/images/servizi/viscerale.jpeg',
     title: 'Osteopatia Viscerale',
     intro:
       "L'osteopatia viscerale si occupa della mobilità e motilità degli organi interni e delle loro connessioni con il sistema muscolo-scheletrico.",
@@ -253,6 +259,7 @@ const services = [
     category: 'Osteopatia',
     shortTitle: 'Craniosacrale',
     icon: '🧠',
+    image: '/images/servizi/craniosacrale.jpeg',
     title: 'Osteopatia Craniosacrale',
     intro:
       "L'osteopatia craniosacrale è un approccio dolce e non invasivo che lavora sul sistema nervoso centrale attraverso le strutture ossee del cranio e del sacro.",
@@ -278,6 +285,7 @@ const services = [
     category: 'Rieducazione',
     shortTitle: 'Ginnastica Posturale',
     icon: '🏋️',
+    image: '/images/servizi/posturale.jpeg',
     title: 'Ginnastica Posturale',
     intro:
       "La ginnastica posturale è un programma di esercizi personalizzato per migliorare la postura, rafforzare i muscoli profondi e prevenire il dolore cronico.",
@@ -303,6 +311,7 @@ const services = [
     category: 'Osteopatia Specialistica',
     shortTitle: 'Osteopatia Pediatrica',
     icon: '👶',
+    image: '/images/servizi/pediatrica.jpeg',
     title: 'Osteopatia Pediatrica e Neonatale',
     intro:
       "Trattamenti dolci e sicuri per neonati, lattanti e bambini, in collaborazione con il Dott. Emanuele Pippolo, specialista in osteopatia neonatale.",
@@ -326,14 +335,15 @@ const services = [
   {
     id: 'osteopatia-sportiva',
     category: 'Osteopatia',
-    shortTitle: 'Osteopatia Sportiva',
+    shortTitle: 'dello Sport',
     icon: '⚽',
-    title: 'Osteopatia Sportiva',
+    image: '/images/servizi/sportiva.jpeg',
+    title: 'Osteopatia dello Sport',
     intro:
       "Trattamenti specifici per atleti amatoriali e agonisti: prevenzione, recupero dagli infortuni e ottimizzazione della performance.",
     description: [
       "Leonardo Dalla Torre, grazie alla sua formazione come personal trainer e osteopata, è particolarmente preparato per trattare gli infortuni sportivi e ottimizzare la funzionalità fisica degli atleti.",
-      "L'osteopatia sportiva integra l'analisi biomeccanica del gesto atletico con il trattamento manuale, permettendo di identificare e correggere i pattern di movimento che predispongono agli infortuni.",
+      "L'osteopatia dello sport integra l'analisi biomeccanica del gesto atletico con il trattamento manuale, permettendo di identificare e correggere i pattern di movimento che predispongono agli infortuni.",
     ],
     duration: '50–60 minuti',
     who: 'Sportivi amatoriali e agonisti',
@@ -648,17 +658,20 @@ function submitViaWhatsApp() {
 .symptom-list li { font-size: 0.88rem; color: var(--color-text-light); display: flex; gap: 0.4rem; }
 .symptom-check { color: var(--color-primary); font-weight: 700; }
 
-.service-image-placeholder {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+.service-image-wrapper {
   border-radius: var(--radius);
+  overflow: hidden;
   aspect-ratio: 3 / 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 5rem;
   box-shadow: var(--shadow-md);
   position: sticky;
   top: 130px;
+}
+
+.service-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* CTA */
@@ -674,7 +687,7 @@ function submitViaWhatsApp() {
   }
   .service-block--reversed .service-block__content { order: 1; }
   .service-block--reversed .service-block__visual { order: 2; }
-  .service-image-placeholder { position: static; aspect-ratio: 16/9; }
+  .service-image-wrapper { position: static; aspect-ratio: 16/9; }
   .symptom-list { grid-template-columns: 1fr; }
 }
 </style>

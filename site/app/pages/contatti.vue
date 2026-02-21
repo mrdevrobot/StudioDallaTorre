@@ -193,7 +193,7 @@
                   <option value="osteopatia-craniosacrale">Osteopatia Craniosacrale</option>
                   <option value="ginnastica-posturale">Ginnastica Posturale</option>
                   <option value="osteopatia-pediatrica">Osteopatia Pediatrica / Neonatale</option>
-                  <option value="osteopatia-sportiva">Osteopatia Sportiva</option>
+                  <option value="osteopatia-sportiva">Osteopatia dello Sport</option>
                   <option value="informazioni">Richiesta informazioni generali</option>
                 </select>
                 <span class="error-msg" v-if="errors.subject">{{ errors.subject }}</span>
@@ -385,7 +385,7 @@ async function submitForm() {
   const subjectLabels: Record<string, string> = {
     osteopatia: 'Osteopatia',
     'osteopatia-pediatrica': 'Osteopatia Pediatrica',
-    'osteopatia-sportiva': 'Osteopatia Sportiva',
+    'osteopatia-sportiva': 'Osteopatia dello Sport',
     'osteopatia-gravidanza': 'Osteopatia in Gravidanza',
     'osteopatia-geriatrica': 'Osteopatia Geriatrica',
     'ginnastica-posturale': 'Ginnastica Posturale',
