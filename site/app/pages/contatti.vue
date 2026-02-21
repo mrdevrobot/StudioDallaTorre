@@ -381,10 +381,50 @@ function validateForm(): boolean {
 async function submitForm() {
   if (!validateForm()) return
   isSubmitting.value = true
-  // Simulate API call - in production replace with actual form submission
-  await new Promise(resolve => setTimeout(resolve, 1500))
-  isSubmitting.value = false
-  submitted.value = true
+
+  const subjectLabels: Record<string, string> = {
+    osteopatia: 'Osteopatia',
+    'osteopatia-pediatrica': 'Osteopatia Pediatrica',
+    'osteopatia-sportiva': 'Osteopatia Sportiva',
+    'osteopatia-gravidanza': 'Osteopatia in Gravidanza',
+    'osteopatia-geriatrica': 'Osteopatia Geriatrica',
+    'ginnastica-posturale': 'Ginnastica Posturale',
+    altro: 'Altro',
+  }
+  const preferredTimeLabels: Record<string, string> = {
+    mattina: 'Mattina (8:00–13:00)',
+    pomeriggio: 'Pomeriggio (14:00–20:00)',
+    indifferente: 'Indifferente',
+  }
+
+  const payload = {
+    access_key: '95371d5f-a99b-4984-ac7a-2d5d2c22c878',
+    subject: `Richiesta di prenotazione – ${subjectLabels[form.subject] ?? form.subject}`,
+    from_name: 'Studio Dalla Torre – Sito Web',
+    name: `${form.firstName} ${form.lastName}`,
+    email: form.email,
+    ...(form.phone ? { telefono: form.phone } : {}),
+    servizio: subjectLabels[form.subject] ?? form.subject,
+    ...(form.preferredTime ? { orario_preferito: preferredTimeLabels[form.preferredTime] ?? form.preferredTime } : {}),
+    messaggio: form.message || '(nessun messaggio)',
+    botcheck: '',
+  }
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload),
+    })
+    const data = await res.json()
+    if (!data.success) throw new Error(data.message ?? 'Errore invio')
+    submitted.value = true
+  } catch (err) {
+    alert('Si è verificato un errore durante l\'invio. Riprova oppure contattaci via WhatsApp o email.')
+    console.error('Web3Forms error:', err)
+  } finally {
+    isSubmitting.value = false
+  }
 }
 </script>
 
