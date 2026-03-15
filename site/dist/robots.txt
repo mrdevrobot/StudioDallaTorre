@@ -1,0 +1,9 @@
+# START nuxt-robots (indexable)
+User-agent: *
+Allow: /
+
+User-agent: *
+Disallow: 
+
+Sitemap: https://www.studiodallatorre.it/sitemap.xml
+# END nuxt-robots

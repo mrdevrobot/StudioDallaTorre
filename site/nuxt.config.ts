@@ -50,6 +50,12 @@ export default defineNuxtConfig({
     },
   },
 
+  nitro: {
+    prerender: {
+      routes: ['/sitemap.xml'],
+    },
+  },
+
   sitemap: {
     xsl: false,
     urls: [
