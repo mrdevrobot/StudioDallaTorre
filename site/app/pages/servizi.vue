@@ -43,7 +43,7 @@
             <h2>{{ service.title }}</h2>
             <p class="service-intro">{{ service.intro }}</p>
             <div class="service-details">
-              <p v-for="(para, i) in service.description" :key="i">{{ para }}</p>
+              <p v-for="(para, i) in service.description" :key="i" v-html="para" />
             </div>
             <div class="service-meta">
               <div class="service-meta__item" v-if="service.duration">
@@ -51,9 +51,6 @@
               </div>
               <div class="service-meta__item" v-if="service.who">
                 <strong>👤 Per chi:</strong> {{ service.who }}
-              </div>
-              <div class="service-meta__item" v-if="service.expert">
-                <strong>👩‍⚕️ Specialista:</strong> {{ service.expert }}
               </div>
             </div>
             <div class="service-symptoms" v-if="service.symptoms && service.symptoms.length">
@@ -64,7 +61,7 @@
                 </li>
               </ul>
             </div>
-            <button class="btn btn--primary" @click="openModal(service)">Prenota questo servizio</button>
+            <button class="btn btn--primary" @click="openModal(service)">Prendi un appuntamento</button>
           </div>
           <div class="service-block__visual">
             <div class="service-image-wrapper">
@@ -204,54 +201,58 @@ const services = [
   {
     id: 'osteopatia-strutturale',
     category: 'Osteopatia',
-    shortTitle: 'Osteopatia Strutturale',
+    shortTitle: 'Strutturale',
     icon: '🦴',
     image: '/images/servizi/strutturale.jpeg',
     title: "Osteopatia Strutturale",
     intro:
       "Il trattamento osteopatico strutturale agisce sul sistema muscolo-scheletrico per ripristinare la mobilità articolare, ridurre tensioni muscolari e alleviare il dolore.",
     description: [
-      "L'osteopatia strutturale lavora principalmente su articolazioni, muscoli, legamenti e fasce. Attraverso tecniche di manipolazione, mobilizzazione e tecniche miofasciali, l'osteopata identifica e tratta le restrizioni di mobilità che causano dolore e disfunzione.",
-      "È il tipo di trattamento più conosciuto e spesso il primo approccio per chi soffre di problemi alla schiena, al collo, alle spalle o alle articolazioni periferiche.",
+      "L'osteopatia strutturale lavora principalmente su <strong>articolazioni, muscoli, legamenti e fasce</strong>. Attraverso tecniche di <strong>manipolazione, mobilizzazione</strong> e tecniche <strong>miofasciali</strong>, l'osteopata identifica e tratta le <strong>restrizioni di mobilità</strong> che causano dolore e disfunzione.",
+      "È una terapia manuale indicata per chi soffre di problemi alla <strong>schiena</strong>, al <strong>collo</strong>, alle <strong>spalle</strong> o alle <strong>articolazioni periferiche</strong>.",
     ],
     duration: '45–60 minuti',
-    who: 'Adulti e adolescenti con problemi muscolo-scheletrici',
-    expert: 'Martina e Leonardo Dalla Torre',
+    who: 'Per tutti i pazienti con problemi muscolo-scheletrici',
     symptoms: [
-      'Lombalgia (mal di schiena basso)',
       'Cervicalgia e torcicollo',
-      'Ernia del disco',
+      'Dorsalgia (mal di schiena alto)',
+      'Lombalgia (mal di schiena basso)',
+      'Lombo-sciatalgia e cruralgia',
+      'Ernia del disco e protusioni',
       'Dolori alla spalla (periartrite)',
       'Colpo di frusta',
       'Dolori al ginocchio e all\'anca',
       'Tendiniti e tensioni muscolari',
       'Problemi posturali',
+      'Dolori articolari cronici o acuti',
+      'Coxartrosi e gonartrosi (anca e ginocchio)',
     ],
   },
   {
     id: 'osteopatia-viscerale',
     category: 'Osteopatia',
-    shortTitle: 'Osteopatia Viscerale',
+    shortTitle: 'Viscerale',
     icon: '🫁',
     image: '/images/servizi/viscerale.jpeg',
     title: 'Osteopatia Viscerale',
     intro:
       "L'osteopatia viscerale si occupa della mobilità e motilità degli organi interni e delle loro connessioni con il sistema muscolo-scheletrico.",
     description: [
-      "Gli organi interni sono circondati da fasce e connettivi che li collegano alle strutture scheletriche. Quando si creano restrizioni a questo livello, possono comparire dolori riferiti, problemi digestivi e disfunzioni a distanza.",
-      "L'osteopata viscerale utilizza tecniche dolci e precise per liberare le tensioni viscerali, migliorare la circolazione locale e ristabilire la normale mobilità degli organi.",
+      "Gli organi interni sono circondati da <strong>fasce e connettivi</strong> che li collegano alle strutture scheletriche. Quando si creano restrizioni a questo livello, possono comparire <strong>dolori riferiti</strong>, <strong>problemi digestivi</strong> e disfunzioni a distanza.",
+      "L'osteopata viscerale utilizza <strong>tecniche dolci e precise</strong> per liberare le <strong>tensioni viscerali</strong>, migliorare la circolazione locale e ristabilire la normale <strong>mobilità degli organi</strong>.",
     ],
     duration: '45–60 minuti',
     who: 'Chi soffre di disturbi digestivi o dolori viscerali',
-    expert: 'Martina Dalla Torre',
     symptoms: [
       'Reflusso gastroesofageo',
       'Sindrome del colon irritabile',
       'Gonfiore addominale e meteorismo',
       'Costipazione cronica',
       'Dolori addominali senza causa organica apparente',
+      'Alterazioni della motilità intestinale (diarrea, stipsi)',
       'Ernia iatale',
       'Tensioni post-operatorie addominali',
+      'Problemi uro-genitali (cistite, dismenorrea)',
     ],
   },
   {
@@ -262,22 +263,115 @@ const services = [
     image: '/images/servizi/craniosacrale.jpeg',
     title: 'Osteopatia Craniosacrale',
     intro:
-      "L'osteopatia craniosacrale è un approccio dolce e non invasivo che lavora sul sistema nervoso centrale attraverso le strutture ossee del cranio e del sacro.",
+      "Tecnica manuale non invasiva che valuta e tratta le restrizioni di mobilità del sistema craniosacrale, composto da cranio, colonna vertebrale e sacro.",
     description: [
-      "Il sistema craniosacrale comprende le membrane e il liquido cerebrospinale che circondano il cervello e il midollo spinale. L'osteopata, attraverso un tocco estremamente delicato, percepisce e corregge le restrizioni in questo sistema.",
-      "È un approccio particolarmente indicato per persone sensibili, anziani, bambini e per problematiche croniche dove la manipolazione strutturale non è indicata.",
+      "Il <strong>sistema craniosacrale</strong> comprende le <strong>membrane e il liquido cerebrospinale</strong> che circondano il cervello e il midollo spinale. L'osteopata, attraverso un <strong>tocco estremamente delicato</strong>, percepisce e corregge le <strong>restrizioni di mobilità</strong> in questo sistema, favorendo il riequilibrio del <strong>sistema nervoso autonomo</strong>.",
     ],
     duration: '50–60 minuti',
     who: 'Adulti, anziani, bambini, neonati',
-    expert: 'Martina Dalla Torre',
     symptoms: [
       'Cefalee ed emicranie',
+      'Vertigini e disturbi dell\'equilibrio',
       'Disturbi del sonno',
       'Stress e ansia',
+      'Riequilibrio neurovegetativo e miglioramento della resilienza allo stress',
       'Problemi dell\'ATM (articolazione temporo-mandibolare)',
-      'Tinniti (fischi alle orecchie)',
+      'Acufene, ronzio, fischi nelle orecchie',
       'Disturbi della concentrazione',
+      'Disturbi endocrini e ormonali',
       'Nevralgie facciali',
+      'Apparato stomatognatico (bruxismo, malocclusioni)',
+      'Disturbi oculari e visivi (astigmatismo, miopia, affaticamento visivo)',
+    ],
+  },
+  {
+    id: 'osteopatia-fasciale',
+    category: 'Osteopatia',
+    shortTitle: 'Fasciale',
+    icon: '🧵',
+    image: '/images/servizi/trattamento-09.jpeg',
+    title: 'Osteopatia Fasciale',
+    intro:
+      "Approccio manuale che agisce sul sistema fasciale \u2014 la rete continua di tessuto connettivo che avvolge, sostiene e interconnette ogni struttura del corpo \u2014 per liberare tensioni profonde e ripristinare l\u2019equilibrio tissutale.",
+    description: [
+      "La fascia non \u00e8 solo un involucro passivo: \u00e8 un organo <strong>sensoriale, meccanico e neuro-vascolare</strong> che trasmette forze in tutto il corpo. L\u2019approccio <strong>mio-fasciale</strong> lavora sulle catene di tensione che collegano muscoli lontani tra loro, sciogliendo i <strong>trigger point fasciali</strong> e le restrizioni che limitano il movimento e generano dolore diffuso o \u201cmigrante\u201d.",
+      "L\u2019approccio <strong>neuro-fasciale</strong> riconosce che le fasce sono riccamente innervate da meccanocettori, nocicettori e propriocettori. Lavorare sul sistema fasciale significa influenzare il <strong>sistema nervoso autonomo</strong>, ridurre la <strong>sensibilizzazione centrale</strong> e modulare la <strong>percezione del dolore</strong> a livello corticale. Tecniche di inibizione progressiva, scollamento fasciale e integrazione neurale vengono combinate per normalizzare il tono del tessuto e ristabilire la comunicazione tra periferia e sistema nervoso centrale.",
+    ],
+    duration: '50\u201360 minuti',
+    who: 'Chi soffre di dolori cronici, rigidit\u00e0 diffusa o esiti post-traumatici',
+    symptoms: [
+      'Dolore miofasciale cronico e diffuso',
+      'Fibromialgia e sindromi da sensibilizzazione centrale',
+      'Rigidit\u00e0 muscolare e limitazione del movimento',
+      'Esiti post-traumatici e cicatrici aderenziali',
+      'Esiti post-chirurgici con alterazioni tissutali',
+      'Sindrome da dolore regionale complesso (CRPS)',
+      'Cefalea tensiva e cervicale',
+      'Tensioni posturali croniche da sovraccarico',
+      'Disturbi del sistema nervoso autonomo (stress, fatica cronica)',
+      'Recupero dopo infortuni muscolari ricorrenti',
+    ],
+  },
+  {
+    id: 'osteopatia-pediatrica',
+    category: 'Osteopatia Specialistica',
+    shortTitle: 'Osteopatia Pediatrica',
+    icon: '👶',
+    image: '/images/servizi/pediatrica.jpeg',
+    title: 'Osteopatia Pediatrica e Neonatale',
+    intro:
+      "Approccio manuale dolce e non invasivo dedicato a neonati, lattanti e bambini, finalizzato al ripristino dell'equilibrio tissutale e al supporto dello sviluppo neuromotorio.",
+    description: [
+      "Durante il parto, anche fisiologico, il <strong>cranio e il rachide</strong> del neonato possono subire <strong>compressioni e tensioni</strong> che, se non risolte, interferiscono con il corretto sviluppo delle strutture osteoarticolari e neurologiche. L'osteopatia neonatale impiega <strong>tecniche di contatto estremamente leggero</strong> per riequilibrare le tensioni <strong>cranio-sacrali, fasciali e viscerali</strong>, favorendo una maturazione armoniosa del <strong>sistema nervoso centrale e periferico</strong>.",
+      "Nei bambini in età evolutiva, l'osteopatia pediatrica valuta e tratta le <strong>disfunzioni somatiche</strong> correlate alla <strong>crescita scheletrica</strong>, ai pattern posturali compensatori e agli esiti di traumi. L'approccio integra la valutazione globale del <strong>sistema fasciale, cranio-sacrale e muscolo-scheletrico</strong> con l'<strong>anamnesi dello sviluppo neuropsicomotorio</strong>, garantendo un trattamento appropriato a ogni fase dell'accrescimento.",
+    ],
+    duration: '30–45 minuti per neonati, 45 min per bambini',
+    who: 'Neonati, lattanti e bambini fino a 14 anni',
+    symptoms: [
+      'Difficoltà di allattamento',
+      'Coliche e irrequietezza nei neonati',
+      'Plagiocefalia (testa piatta)',
+      'Problemi del sonno nei lattanti',
+      'Ritardo dello sviluppo motorio',
+      'Dolori da crescita',
+      'Scoliosi idiopatica giovanile',
+      'Torcicollo congenito',
+      'Congiuntivite e Sinusite ricorrente',
+      'Scoliosi e paramorfismi in età evolutiva',
+      'Disturbi dell\'attenzione e iperattività (ADHD)',
+      'Otite ricorrente e disturbi dell\'udito',
+    ],
+  },
+  {
+    id: 'osteopatia-sportiva',
+    category: 'Osteopatia',
+    shortTitle: 'Osteopatia dello Sport',
+    icon: '⚽',
+    image: '/images/servizi/sportiva.jpeg',
+    title: 'Osteopatia dello Sport',
+    intro:
+      "Trattamenti specifici per atleti amatoriali e agonisti: prevenzione, recupero dagli infortuni e ottimizzazione della performance.",
+    description: [
+      "L'osteopatia dello sport integra l'<strong>analisi biomeccanica del gesto atletico</strong> con il trattamento manuale, permettendo di identificare e correggere i <strong>pattern di movimento</strong> che predispongono agli infortuni.",
+      "Ogni trattamento è accompagnato da un <strong>protocollo di esercizi personalizzati</strong> da svolgere a casa: esercizi di <strong>mobilità</strong>, <strong>rinforzo muscolare mirato</strong> e <strong>lavoro propriocettivo</strong> per consolidare i risultati ottenuti in studio, accelerare il recupero e ridurre il rischio di recidiva.",
+    ],
+    duration: '50–60 minuti',
+    who: 'Sportivi amatoriali e agonisti',
+    symptoms: [
+      'Distorsioni e stiramenti',
+      'Tendinopatie (Achille, Rotuleo)',
+      'Sindrome della bandelletta ileotibiale',
+      'Pubalgia',
+      'Dolori da sovraccarico',
+      'Recupero post-operatorio sportivo',
+      'Ottimizzazione della performance',
+      'Fascite plantare e dolori al piede',
+      'Epicondilite (gomito del tennista)',
+      'Cuffia dei rotatori e dolori alla spalla',
+      'Sindrome da overuse (frattura da stress)',
+      'Meniscopatie e dolori al ginocchio',
+      'Legamento crociato anteriore (LCA) e posteriore (LCP)',
+      'Trattamento post-chirurgico',
     ],
   },
   {
@@ -290,12 +384,12 @@ const services = [
     intro:
       "La ginnastica posturale è un programma di esercizi personalizzato per migliorare la postura, rafforzare i muscoli profondi e prevenire il dolore cronico.",
     description: [
-      "Martina e Leonardo, con la loro formazione in scienze motorie, progettano programmi di esercizio specifici per ogni paziente. L'obiettivo è correggere gli squilibri muscolari, migliorare la consapevolezza corporea e consolidare i risultati ottenuti con i trattamenti osteopatici.",
-      "I programmi includono esercizi di stretching, rinforzo muscolare, respirazione e propriocezione. Possono essere svolti in studio o continuati autonomamente a casa.",
+      "Con la formazione in <strong>scienze motorie</strong>, lo studio progetta <strong>programmi di esercizio specifici</strong> per ogni paziente. L'obiettivo è correggere gli <strong>squilibri muscolari</strong>, migliorare la <strong>consapevolezza corporea</strong> e consolidare i risultati ottenuti con i trattamenti osteopatici.",
+      "I programmi includono esercizi di <strong>stretching</strong>, <strong>rinforzo muscolare</strong>, <strong>respirazione</strong> e <strong>propriocezione</strong>. Possono essere svolti in studio o continuati autonomamente a casa o in palestra",
+      "L'intervento si basa sui principi dell'esercizio terapeutico attivo, con progressioni individualizzate"
     ],
     duration: '45–60 minuti (individuale o piccoli gruppi)',
     who: 'Adulti di tutte le età e sportivi',
-    expert: 'Martina e Leonardo Dalla Torre',
     symptoms: [
       'Scoliosi e paramorfismi',
       'Iperlordosi e ipercifosi',
@@ -304,58 +398,6 @@ const services = [
       'Rigidità muscolare diffusa',
       'Prevenzione in sportivi',
       'Recupero post-infortunio',
-    ],
-  },
-  {
-    id: 'osteopatia-pediatrica',
-    category: 'Osteopatia Specialistica',
-    shortTitle: 'Osteopatia Pediatrica',
-    icon: '👶',
-    image: '/images/servizi/pediatrica.jpeg',
-    title: 'Osteopatia Pediatrica e Neonatale',
-    intro:
-      "Trattamenti dolci e sicuri per neonati, lattanti e bambini, in collaborazione con il Dott. Emanuele Pippolo, specialista in osteopatia neonatale.",
-    description: [
-      "Il parto, anche quando si svolge normalmente, può lasciare tensioni significative nel cranio e nel corpo del neonato. L'osteopatia neonatale utilizza tecniche estremamente delicate per liberare queste tensioni e favorire uno sviluppo armonioso.",
-      "Per i bambini più grandi, l'osteopatia pediatrica affronta problematiche legate alla crescita, ai traumi, e alle difficoltà posturali. Il Dott. Emanuele Pippolo collabora periodicamente con lo studio per offrire un'assistenza specialistica di alto livello.",
-    ],
-    duration: '30–45 minuti per neonati, 45 min per bambini',
-    who: 'Neonati, lattanti e bambini fino a 14 anni',
-    expert: 'Dott. Emanuele Pippolo (collaboratore) + Martina Dalla Torre',
-    symptoms: [
-      'Difficoltà di allattamento',
-      'Coliche e irrequietezza nei neonati',
-      'Plagiocefalia (testa piatta)',
-      'Problemi del sonno nei lattanti',
-      'Ritardi motori',
-      'Dolori da crescita',
-      'Scoliosi idiopatica giovanile',
-    ],
-  },
-  {
-    id: 'osteopatia-sportiva',
-    category: 'Osteopatia',
-    shortTitle: 'dello Sport',
-    icon: '⚽',
-    image: '/images/servizi/sportiva.jpeg',
-    title: 'Osteopatia dello Sport',
-    intro:
-      "Trattamenti specifici per atleti amatoriali e agonisti: prevenzione, recupero dagli infortuni e ottimizzazione della performance.",
-    description: [
-      "Leonardo Dalla Torre, grazie alla sua formazione come personal trainer e osteopata, è particolarmente preparato per trattare gli infortuni sportivi e ottimizzare la funzionalità fisica degli atleti.",
-      "L'osteopatia dello sport integra l'analisi biomeccanica del gesto atletico con il trattamento manuale, permettendo di identificare e correggere i pattern di movimento che predispongono agli infortuni.",
-    ],
-    duration: '50–60 minuti',
-    who: 'Sportivi amatoriali e agonisti',
-    expert: 'Leonardo Dalla Torre',
-    symptoms: [
-      'Distorsioni e stiramenti',
-      'Tendinopatie (Achille, Rotuleo)',
-      'Sindrome della bandelletta ileotibiale',
-      'Pubalgia',
-      'Dolori da sovraccarico',
-      'Recupero post-operatorio sportivo',
-      'Ottimizzazione della performance',
     ],
   },
 ]

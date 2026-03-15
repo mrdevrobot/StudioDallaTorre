@@ -11,10 +11,10 @@
     <section class="page-hero">
       <div class="container">
         <span class="section-label">Il Nostro Team</span>
-        <h1>Due fratelli, una missione: il tuo benessere</h1>
+        <h1>Due fratelli, una missione: la tua salute</h1>
         <p class="page-hero__subtitle">
-          Martina e Leonardo Dalla Torre combinano anni di esperienza in scienze motorie e
-          osteopatia per offrirti un percorso di cura completo e personalizzato.
+          Martina e Leonardo Dalla Torre combinano anni di esperienza in 
+          osteopatia e scienze motorie per offrirti un percorso di cura completo e personalizzato.
         </p>
       </div>
     </section>
@@ -39,8 +39,8 @@
             </p>
             <p>
               Situato in Via Eraclea 5 a San Donà di Piave, il nostro studio è un ambiente
-              accogliente e professionale dove prendersi cura di sé stessi diventa un'esperienza
-              positiva e rassicurante.
+              accogliente e professionale. Dove ogni paziente è trattato con rispetto, competenza e passione.
+
             </p>
           </div>
           <div class="story-visual">
@@ -49,6 +49,22 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- CITAZIONE STILL -->
+    <section class="section section--still-quote">
+      <div class="container">
+        <blockquote class="still-quote">
+          <span class="still-quote__mark">&#8220;</span>
+          <p class="still-quote__text">
+            Conosci la tua anatomia e la tua fisiologia, ma quando posi le mani sul corpo di un paziente non dimenticare che vi abita un anima vivente.
+          </p>
+          <footer class="still-quote__footer">
+            <strong>Andrew Taylor Still</strong>
+            <span>Fondatore dell'Osteopatia (1828–1917)</span>
+          </footer>
+        </blockquote>
       </div>
     </section>
 
@@ -70,12 +86,11 @@
               <h3>Dott.ssa Martina Dalla Torre</h3>
               <span class="team-badge">Osteopata D.O.</span>
             </div>
-            <p class="team-card__role">Fondatrice · Osteopata · Personal Trainer</p>
+            <p class="team-card__role">Fondatrice · Osteopata · Chinesiologa · Personal Trainer</p>
             <p>
-              Martina, 41 anni, è laureata in scienze motorie e osteopata D.O. (Diploma in
+              Martina, {{ martinaAge }} anni, è laureata in scienze motorie e osteopata D.O. (Diploma in
               Osteopatia). Con oltre <strong>15 anni di esperienza</strong> nel settore della
-              salute e del personal training e <strong>5 anni come osteopata</strong>, rappresenta
-              il punto di riferimento dello studio.
+              salute e del personal training e <strong>5 anni come osteopata</strong>.
             </p>
             <p>
               La sua lunga esperienza nel campo delle scienze motorie le permette di integrare
@@ -100,13 +115,13 @@
           </div>
           <div class="team-card__content">
             <div class="team-card__header">
-              <h3>Leonardo Dalla Torre</h3>
+              <h3>Dott. Leonardo Dalla Torre</h3>
               <span class="team-badge">Osteopata</span>
             </div>
-            <p class="team-card__role">Osteopata · Personal Trainer</p>
+            <p class="team-card__role">Fondatore · Osteopata · Chinesiologo · Personal Trainer </p>
             <p>
-              Leonardo, 25 anni, è laureato in scienze motorie e osteopata. Con
-              <strong>3 anni di esperienza come personal trainer</strong> e
+              Leonardo, {{ leonardoAge }} anni, è laureato in scienze motorie e osteopata. Con
+              <strong>5 anni di esperienza come personal trainer</strong> e
               <strong>1 anno come osteopata</strong>, porta energia, freschezza e le più recenti
               conoscenze scientifiche nello studio.
             </p>
@@ -199,12 +214,25 @@ useHead({
   ],
 })
 
+function calcAge(birthDate: Date): number {
+  const today = new Date()
+  let age = today.getFullYear() - birthDate.getFullYear()
+  const hasBirthdayPassed =
+    today.getMonth() > birthDate.getMonth() ||
+    (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate())
+  if (!hasBirthdayPassed) age--
+  return age
+}
+
+const martinaAge = calcAge(new Date(1985, 0, 3))
+const leonardoAge = calcAge(new Date(2000, 8, 28))
+
 const values = [
   {
     icon: '👂',
     title: 'Ascolto',
     description:
-      'Ogni percorso inizia dall\'ascolto attento delle tue esigenze. Dedichiamo il tempo necessario per comprendere la tua storia clinica e i tuoi obiettivi.',
+      'Ogni percorso inizia dall\'ascolto attento delle tue esigenze. Dedichiamo il tempo necessario per conoscerti davvero.',
   },
   {
     icon: '🔬',
@@ -214,13 +242,13 @@ const values = [
   },
   {
     icon: '🤲',
-    title: 'Approccio Olistico',
+    title: 'Approccio Globale',
     description:
       'Guardiamo la persona nella sua totalità. Non trattiamo solo il sintomo, ma cerchiamo la causa profonda del disagio.',
   },
   {
     icon: '💪',
-    title: 'Empowerment',
+    title: 'Supporto Attivo',
     description:
       'Ti forniamo gli strumenti per prenderti cura di te stesso. Esercizi, consigli posturali e consapevolezza del corpo.',
   },
@@ -234,12 +262,62 @@ const values = [
     icon: '❤️',
     title: 'Passione',
     description:
-      'Come fratelli condividiamo la passione per il benessere. Ogni giorno ci impegniamo per fare la differenza nella vita dei nostri pazienti.',
+      'L\'osteopatia non è stata una scelta casuale: è nata dalla convinzione che la cura autentica passi attraverso le mani, l\'ascolto e la presenza.',
   },
 ]
 </script>
 
 <style scoped>
+/* STILL QUOTE */
+.section--still-quote {
+  background: var(--color-text);
+  padding: 4rem 0;
+}
+
+.still-quote {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.still-quote__mark {
+  font-family: Georgia, serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--color-secondary);
+  opacity: 0.6;
+  display: block;
+  margin-bottom: -1rem;
+}
+
+.still-quote__text {
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  font-style: italic;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 1.5rem;
+}
+
+.still-quote__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: center;
+}
+
+.still-quote__footer strong {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+
+.still-quote__footer span {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .page-hero {
   padding: 8rem 0 3rem;
   background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-bg) 100%);

@@ -52,6 +52,17 @@ export default defineNuxtConfig({
 
   sitemap: {
     xsl: false,
+    urls: [
+      { loc: '/',                       priority: 1.0,  changefreq: 'weekly'  },
+      { loc: '/servizi',                priority: 0.9,  changefreq: 'monthly' },
+      { loc: '/osteopatia',             priority: 0.9,  changefreq: 'monthly' },
+      { loc: '/trattamenti',            priority: 0.8,  changefreq: 'monthly' },
+      { loc: '/chi-siamo',              priority: 0.8,  changefreq: 'monthly' },
+      { loc: '/trova-il-tuo-percorso',  priority: 0.7,  changefreq: 'monthly' },
+      { loc: '/contatti',               priority: 0.7,  changefreq: 'monthly' },
+      { loc: '/privacy',                priority: 0.2,  changefreq: 'yearly'  },
+      { loc: '/cookie',                 priority: 0.2,  changefreq: 'yearly'  },
+    ],
   },
 
   robots: {

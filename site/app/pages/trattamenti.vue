@@ -33,7 +33,6 @@
                 <th>Approccio</th>
                 <th>Indicato per</th>
                 <th>Intensità</th>
-                <th>Prima sessione</th>
               </tr>
             </thead>
             <tbody>
@@ -47,7 +46,6 @@
                   </div>
                   <span class="intensity-label">{{ row.intensityLabel }}</span>
                 </td>
-                <td>{{ row.firstSession }}</td>
               </tr>
             </tbody>
           </table>
@@ -78,14 +76,8 @@
                 <li v-for="pro in approach.pros" :key="pro">✓ {{ pro }}</li>
               </ul>
             </div>
-            <div class="approach-cons">
-              <h4>Quando preferire altro</h4>
-              <ul>
-                <li v-for="con in approach.cons" :key="con">→ {{ con }}</li>
-              </ul>
-            </div>
             <NuxtLink :to="approach.link" class="btn btn--secondary approach-btn">
-              Scopri il servizio
+              Approfondisci
             </NuxtLink>
           </div>
         </div>
@@ -167,55 +159,57 @@ const comparisonRows = [
     name: 'Osteopatia Strutturale',
     approach: 'Manipolazione e mobilizzazione articolare',
     forWho: 'Adulti con dolori muscolo-scheletrici',
-    intensity: 75,
+    intensity: 65,
     intensityLevel: 'medium',
-    intensityLabel: 'Media',
-    firstSession: '50–60 min',
+    intensityLabel: 'Moderata',
   },
   {
     name: 'Osteopatia Viscerale',
     approach: 'Mobilità degli organi interni',
     forWho: 'Disturbi digestivi e dolori viscerali',
-    intensity: 40,
+    intensity: 30,
     intensityLevel: 'low',
     intensityLabel: 'Delicata',
-    firstSession: '50–60 min',
   },
   {
     name: 'Osteopatia Craniosacrale',
-    approach: 'Tocco gentile sul sistema craniosacrale',
+    approach: 'Riequilibrio sul sistema craniosacrale',
     forWho: 'Cefalee, stress, bambini, anziani',
-    intensity: 15,
-    intensityLevel: 'very-low',
-    intensityLabel: 'Molto delicata',
-    firstSession: '55–65 min',
+    intensity: 20,
+    intensityLevel: 'low',
+    intensityLabel: 'Delicata',
   },
   {
     name: 'Ginnastica Posturale',
     approach: 'Esercizi personalizzati attivi',
     forWho: 'Prevenzione e mantenimento',
-    intensity: 60,
+    intensity: 55,
     intensityLevel: 'medium',
     intensityLabel: 'Moderata',
-    firstSession: '50–60 min',
   },
   {
     name: 'Osteopatia Pediatrica',
-    approach: 'Tecniche dolci adattate ai bambini',
+    approach: 'Tecniche dolci adattate ai bambini e alle donne in gravidanza',
     forWho: 'Neonati, lattanti e bambini',
-    intensity: 10,
-    intensityLevel: 'very-low',
-    intensityLabel: 'Delicatissima',
-    firstSession: '30–45 min',
+    intensity: 15,
+    intensityLevel: 'low',
+    intensityLabel: 'Delicata',
   },
   {
     name: 'Osteopatia dello Sport',
     approach: 'Biomeccanica e trattamento infortuni',
     forWho: 'Atleti amatoriali e agonisti',
-    intensity: 80,
+    intensity: 85,
     intensityLevel: 'high',
     intensityLabel: 'Intensa',
-    firstSession: '55–65 min',
+  },
+  {
+    name: 'Osteopatia Fasciale',
+    approach: 'Tecniche lente e sostenute sul tessuto connettivo',
+    forWho: 'Dolori cronici, rigidità, esiti post-traumatici',
+    intensity: 35,
+    intensityLevel: 'low',
+    intensityLabel: 'Delicata',
   },
 ]
 
@@ -232,11 +226,6 @@ const approaches = [
       'Ampiamente documentata scientificamente',
       'Applicabile a quasi tutte le aree del corpo',
     ],
-    cons: [
-      'Gravidanza avanzata (tecniche ad alta velocità)',
-      'Osteoporosi severa',
-      'Pazienti anziani fragili',
-    ],
     link: '/servizi#osteopatia-strutturale',
   },
   {
@@ -251,10 +240,6 @@ const approaches = [
       'Non invasiva, senza controindicazioni significative',
       'Complementare ad altri trattamenti',
     ],
-    cons: [
-      'Effetti più lenti rispetto alla strutturale',
-      'Non indicata come primario trattamento per dolori acuti gravi',
-    ],
     link: '/servizi#osteopatia-craniosacrale',
   },
   {
@@ -267,10 +252,6 @@ const approaches = [
       'Affronta cause profonde di dolori cronici',
       'Efficace per disturbi digestivi e pelvici',
       'Complementa il trattamento strutturale',
-    ],
-    cons: [
-      'Richiede più sedute per vedere risultati',
-      'Non indicata in patologie infiammatorie acute',
     ],
     link: '/servizi#osteopatia-viscerale',
   },
@@ -286,11 +267,21 @@ const approaches = [
       'Adattabile a tutti i livelli di fitness',
       'Esercizi eseguibili anche a casa',
     ],
-    cons: [
-      'Non sostituisce il trattamento osteopatico in fase acuta',
-      'Richiede impegno e costanza',
-    ],
     link: '/servizi#ginnastica-posturale',
+  },
+  {
+    icon: '🧵',
+    type: 'Approccio Fasciale',
+    title: 'Osteopatia Fasciale',
+    description:
+      "Lavora sulle fasce, il tessuto connettivo che avvolge e collega muscoli, organi e strutture dell'intero corpo. Attraverso pressioni lente e sostenute libera tensioni profonde e catene miofasciali restritte, ripristinando la continuità tissutale.",
+    pros: [
+      'Efficace per dolori cronici e rigidità diffusa',
+      'Indicata negli esiti post-traumatici e post-chirurgici',
+      'Integra e potenzia il trattamento strutturale',
+      'Ben tollerata anche da pazienti sensibili',
+    ],
+    link: '/servizi',
   },
 ]
 
@@ -458,8 +449,7 @@ function getWaLink(scenario: typeof scenarios[0]): string {
   border-radius: 3px;
 }
 
-.intensity--very-low { background: #4ade80; }
-.intensity--low { background: #86efac; }
+.intensity--low { background: #4ade80; }
 .intensity--medium { background: #facc15; }
 .intensity--high { background: #f97316; }
 

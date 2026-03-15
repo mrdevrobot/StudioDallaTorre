@@ -76,9 +76,9 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label">Fondamenti</span>
-          <h2>I Quattro Principi dell'Osteopatia</h2>
+          <h2>I Principi Fondamentali dell'Osteopatia</h2>
           <p>
-            L'osteopatia si fonda su quattro principi fondamentali che guidano ogni trattamento.
+            L'osteopatia si fonda su principi fondamentali che guidano ogni trattamento.
           </p>
         </div>
         <div class="grid grid--2">
@@ -87,6 +87,30 @@
             <h3>{{ principle.title }}</h3>
             <p>{{ principle.description }}</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CITAZIONI DEI MAESTRI -->
+    <section class="section quotes-masters">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">Le Parole dei Maestri</span>
+          <h2>Voci che hanno plasmato l'Osteopatia</h2>
+          <p>
+            Le riflessioni dei grandi pionieri che hanno fondato e sviluppato l'osteopatia moderna,
+            fonte perenne di ispirazione per ogni osteopata.
+          </p>
+        </div>
+        <div class="quotes-grid">
+          <blockquote class="quote-card" v-for="quote in quotes" :key="quote.author">
+            <span class="quote-mark">&#8220;</span>
+            <p class="quote-text">{{ quote.text }}</p>
+            <footer class="quote-footer">
+              <strong class="quote-author">{{ quote.author }}</strong>
+              <span class="quote-role">{{ quote.role }}</span>
+            </footer>
+          </blockquote>
         </div>
       </div>
     </section>
@@ -262,27 +286,33 @@ function toggleFaq(index: number) {
 const principles = [
   {
     number: '01',
-    title: 'Il corpo è un\'unità',
+    title: 'Il corpo come unità funzionale',
     description:
-      'Corpo, mente e spirito funzionano come un sistema integrato. Una disfunzione in un\'area può influenzare l\'intero organismo. L\'osteopata valuta sempre il paziente nella sua globalità.',
+      'L\'organismo umano è un sistema integrato in cui le dimensioni biologica, psichica e relazionale sono inscindibilmente connesse. Una disfunzione somatica localizzata non si esaurisce nel distretto colpito, ma modifica i pattern di tensione fasciale, i circuiti neurovegetativi e la risposta adattativa globale. L\'osteopata ragiona sempre per sistemi, non per segmenti.',
   },
   {
     number: '02',
-    title: 'Struttura e funzione sono correlate',
+    title: 'Interdipendenza tra struttura e funzione',
     description:
-      'La struttura anatomica del corpo influenza la sua funzione e viceversa. Un\'alterazione strutturale può compromettere la funzione degli organi e dei tessuti.',
+      'La morfologia anatomica e la fisiologia funzionale si condizionano reciprocamente in modo dinamico e bidirezionale. Un\'alterazione strutturale — sia essa articolare, fasciale o viscerale — modifica i parametri fisiologici locali e a distanza; viceversa, uno squilibrio funzionale cronico induce nel tempo adattamenti morfostrutturali. Identificare e trattare questo rapporto è il fulcro del trattamento osteopatico.',
   },
   {
     number: '03',
-    title: 'Il corpo possiede meccanismi di autoguarigione',
+    title: 'Autoregolazione e capacità di guarigione intrinseca',
     description:
-      'L\'organismo ha una capacità naturale di autoregolazione e guarigione. L\'osteopata lavora per rimuovere gli ostacoli e facilitare questo processo naturale.',
+      'Il corpo è dotato di sofisticati meccanismi omeostatici di autoregolazione — neuroendocrini, immunitari, fasciali — che tendono naturalmente al ripristino dell\'equilibrio. Il compito dell\'osteopata non è sostituirsi a questi processi, ma rimuovere le restrizioni che ne ostacolano l\'espressione, creando le condizioni ottimali affinché l\'organismo recuperi autonomamente la propria salute.',
   },
   {
     number: '04',
-    title: 'Il trattamento si basa sui principi precedenti',
+    title: 'La supremazia dell\'arteria',
     description:
-      'Ogni intervento osteopatico integra questi tre principi. L\'osteopata cerca la causa della disfunzione, non si limita a trattare il sintomo.',
+      'Andrew Taylor Still affermava che la libera circolazione del sangue e di tutti i fluidi corporei — arteriosi, venosi, linfatici e liquorali — è condizione imprescindibile per la salute tissutale. Ogni restrizione meccanica che altera la perfusione locale genera ipossia, accumulo di metaboliti, infiammazione cronica e degenerazione progressiva. Ripristinare la libertà circolatoria è quindi un obiettivo terapeutico prioritario.',
+  },
+  {
+    number: '05',
+    title: 'Il tocco terapeutico',
+    description:
+      'Le mani dell\'osteopata sono al tempo stesso strumento di valutazione e mezzo di cura. Attraverso il contatto manuale diretto l\'operatore percepisce qualità tissutali — densità, temperatura, tensione, mobilità e vitalità — che orientano il trattamento in tempo reale. Il tocco non è mai neutro: modula la risposta del sistema nervoso autonomo, riduce il tono di guardia muscolare e attiva i meccanismi endogeni di modulazione del dolore, rendendo la relazione mano-tessuto il cuore irriducibile della pratica osteopatica.',
   },
 ]
 
@@ -481,6 +511,29 @@ const comparisonRows = [
   },
 ]
 
+const quotes = [
+  {
+    text: 'Trovare la salute dovrebbe essere lo scopo del medico. Chiunque sa trovare la malattia.',
+    author: 'Andrew Taylor Still',
+    role: 'Fondatore dell\'Osteopatia (1828–1917)',
+  },
+  {
+    text: 'La legge della vita è il movimento. La struttura governa la funzione, ma è la funzione a dare senso alla struttura.',
+    author: 'John Martin Littlejohn',
+    role: 'Fondatore della British School of Osteopathy (1865–1947)',
+  },
+  {
+    text: 'Stai fermo, ascolta. Il corpo del paziente conosce la propria storia meglio di qualunque libro.',
+    author: 'Rollin E. Becker DO',
+    role: 'Padre dell\'Osteopatia Cranica (1910–1996)',
+  },
+  {
+    text: 'Quando percepisco il ritmo cranico, mi accordo alla voce della vita che pulsa in ogni essere umano.',
+    author: 'Viola Frymann DO',
+    role: 'Pioniera dell\'Osteopatia Pediatrica (1921–2016)',
+  },
+]
+
 const faqs = [
   {
     question: "L'osteopatia è riconosciuta in Italia?",
@@ -516,6 +569,88 @@ const faqs = [
 </script>
 
 <style scoped>
+/* CITAZIONI DEI MAESTRI */
+.quotes-masters {
+  background: var(--color-text);
+}
+
+.quotes-masters .section-header span,
+.quotes-masters .section-header p {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.quotes-masters .section-header h2 {
+  color: var(--color-white);
+}
+
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.75rem;
+  margin-top: 3rem;
+}
+
+.quote-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  padding: 2rem 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: transform var(--transition), border-color var(--transition);
+}
+
+.quote-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-secondary);
+}
+
+.quote-mark {
+  font-family: Georgia, serif;
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--color-secondary);
+  opacity: 0.7;
+  display: block;
+  margin-bottom: -0.5rem;
+}
+
+.quote-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+  flex: 1;
+}
+
+.quote-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+}
+
+.quote-author {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+
+.quote-role {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .quotes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .page-hero {
   padding: 8rem 0 3rem;
   background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-bg) 100%);
