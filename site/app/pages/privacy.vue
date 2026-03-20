@@ -77,7 +77,7 @@ const lastUpdate = '20 Febbraio 2026'
 
 <style scoped>
 .page-hero {
-  padding: 8rem 0 3rem;
+  padding: 3.5rem 0 3rem;
   background: var(--color-bg-alt);
 }
 .page-hero h1 { max-width: 700px; margin-bottom: 0.5rem; }

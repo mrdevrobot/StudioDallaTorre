@@ -54,6 +54,9 @@ export default defineNuxtConfig({
     prerender: {
       routes: ['/sitemap.xml'],
     },
+    output: {
+      publicDir: 'dist',
+    },
   },
 
   sitemap: {
@@ -66,6 +69,11 @@ export default defineNuxtConfig({
       { loc: '/chi-siamo',              priority: 0.8,  changefreq: 'monthly' },
       { loc: '/trova-il-tuo-percorso',  priority: 0.7,  changefreq: 'monthly' },
       { loc: '/contatti',               priority: 0.7,  changefreq: 'monthly' },
+      { loc: '/blog',                                              priority: 0.8,  changefreq: 'weekly'  },
+      { loc: '/blog/osteopata-san-dona-di-piave',                 priority: 0.9,  changefreq: 'monthly' },
+      { loc: '/blog/osteopatia-pediatrica-neonatale',             priority: 0.9,  changefreq: 'monthly' },
+      { loc: '/blog/osteopatia-disturbi-femminili-ciclo',         priority: 0.9,  changefreq: 'monthly' },
+      { loc: '/blog/osteopatia-post-traumatica-prevenzione',      priority: 0.9,  changefreq: 'monthly' },
       { loc: '/privacy',                priority: 0.2,  changefreq: 'yearly'  },
       { loc: '/cookie',                 priority: 0.2,  changefreq: 'yearly'  },
     ],
@@ -124,11 +132,10 @@ export default defineNuxtConfig({
     '/trattamenti': { prerender: true },
     '/trova-il-tuo-percorso': { prerender: true },
     '/contatti': { prerender: true },
-  },
-
-  nitro: {
-    output: {
-      publicDir: 'dist',
-    },
+    '/blog': { prerender: true },
+    '/blog/osteopata-san-dona-di-piave': { prerender: true },
+    '/blog/osteopatia-pediatrica-neonatale': { prerender: true },
+    '/blog/osteopatia-disturbi-femminili-ciclo': { prerender: true },
+    '/blog/osteopatia-post-traumatica-prevenzione': { prerender: true },
   },
 })

@@ -20,5 +20,6 @@
 
 main {
   flex: 1;
+  padding-top: var(--header-h);
 }
 </style>

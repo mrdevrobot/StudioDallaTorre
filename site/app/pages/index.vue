@@ -338,7 +338,7 @@ const faqs = [
 <style scoped>
 /* HERO */
 .hero {
-  padding: 8rem 0 4rem;
+  padding: 3.5rem 0 4rem;
   background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-bg) 100%);
 }
 
@@ -626,7 +626,7 @@ const faqs = [
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .hero {
-    padding: 6rem 0 3rem;
+    padding: 2rem 0 3rem;
   }
 
   .hero-inner {

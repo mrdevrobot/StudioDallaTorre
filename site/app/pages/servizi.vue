@@ -622,7 +622,7 @@ function submitViaWhatsApp() {
 .modal-leave-to .modal { transform: translateY(10px) scale(0.97); }
 
 .page-hero {
-  padding: 8rem 0 3rem;
+  padding: 3.5rem 0 3rem;
   background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-bg) 100%);
 }
 .page-hero h1 { max-width: 700px; margin-bottom: 1rem; }

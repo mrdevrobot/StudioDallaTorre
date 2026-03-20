@@ -1,5 +1,6 @@
 /* ===== VARIABLES ===== */
 :root {
+  --header-h: 4.5rem;
   --color-primary: #0d64ab;
   --color-primary-dark: #0a4d85;
   --color-primary-light: #d4e8f8;

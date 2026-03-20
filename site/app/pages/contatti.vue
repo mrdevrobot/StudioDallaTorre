@@ -430,7 +430,7 @@ async function submitForm() {
 
 <style scoped>
 .page-hero {
-  padding: 8rem 0 3rem;
+  padding: 3.5rem 0 3rem;
   background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-bg) 100%);
 }
 .page-hero h1 { max-width: 700px; margin-bottom: 1rem; }

@@ -25,6 +25,7 @@
             <li><NuxtLink to="/servizi">Servizi</NuxtLink></li>
             <li><NuxtLink to="/trattamenti">Trattamenti</NuxtLink></li>
             <li><NuxtLink to="/trova-il-tuo-percorso">Trova il Tuo Percorso</NuxtLink></li>
+            <li><NuxtLink to="/blog">Blog</NuxtLink></li>
             <li><NuxtLink to="/contatti">Contatti</NuxtLink></li>
           </ul>
         </div>

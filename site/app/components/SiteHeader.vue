@@ -51,6 +51,7 @@ const navLinks = [
   { to: '/servizi', label: 'Servizi' },
   { to: '/trattamenti', label: 'Trattamenti' },
   { to: '/trova-il-tuo-percorso', label: 'Trova il Tuo Percorso' },
+  { to: '/blog', label: 'Blog' },
 ]
 
 onMounted(() => {
