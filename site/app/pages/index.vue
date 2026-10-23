@@ -4,8 +4,8 @@
     <section class="hero">
       <div class="container hero-inner">
         <div class="hero-content">
-          <span class="section-label">Osteopatia a San Donà di Piave</span>
-          <h1>Il tuo benessere inizia dall'ascolto del corpo</h1>
+          <span class="section-label">Il tuo benessere inizia dall'ascolto del corpo</span>
+          <h1>Il tuo osteopata a San Donà di Piave</h1>
           <p class="hero-subtitle">
             Studio Dalla Torre è il centro di osteopatia di riferimento a San Donà di Piave. Martina e Leonardo Dalla Torre ti guidano verso il recupero funzionale e il benessere attraverso trattamenti osteopatici personalizzati.
           </p>
@@ -197,7 +197,7 @@
 
 <script setup lang="ts">
 useHead({
-  title: 'Studio Dalla Torre – Osteopatia a San Donà di Piave',
+  title: 'Osteopata a San Donà di Piave – Studio Dalla Torre',
   meta: [
     {
       name: 'description',

@@ -82,9 +82,6 @@ useHead({
         'Articoli e guide su osteopatia, dolore, postura e benessere a San Donà di Piave.',
     },
   ],
-  link: [
-    { rel: 'canonical', href: 'https://www.studiodallatorre.it/blog' },
-  ],
 })
 
 const posts = [

@@ -456,9 +456,6 @@ useHead({
     { property: 'article:published_time', content: '2026-03-20' },
     { property: 'article:author', content: 'Dott.ssa Martina Dalla Torre' },
   ],
-  link: [
-    { rel: 'canonical', href: 'https://www.studiodallatorre.it/blog/osteopata-san-dona-di-piave' },
-  ],
 })
 
 useSchemaOrg([

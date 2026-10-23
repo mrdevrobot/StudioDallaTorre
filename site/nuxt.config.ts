@@ -14,6 +14,13 @@ export default defineNuxtConfig({
   site: {
     url: 'https://www.studiodallatorre.it',
     name: 'Studio Dalla Torre – Osteopatia a San Donà di Piave',
+    trailingSlash: true,
+  },
+
+  experimental: {
+    defaults: {
+      nuxtLink: { trailingSlash: 'append' },
+    },
   },
 
   app: {
@@ -21,7 +28,7 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'it' },
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
-      title: 'Studio Dalla Torre – Osteopatia a San Donà di Piave',
+      title: 'Osteopata a San Donà di Piave – Studio Dalla Torre',
       meta: [
         {
           name: 'description',
@@ -40,11 +47,9 @@ export default defineNuxtConfig({
           content:
             'Centro di osteopatia a San Donà di Piave. Trattamenti manuali, ginnastica posturale e molto altro.',
         },
-        { property: 'og:url', content: 'https://www.studiodallatorre.it' },
         { property: 'og:site_name', content: 'Studio Dalla Torre' },
       ],
       link: [
-        { rel: 'canonical', href: 'https://www.studiodallatorre.it' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
       ],
     },
@@ -104,7 +109,7 @@ export default defineNuxtConfig({
         postalCode: '30027',
         addressCountry: 'IT',
       },
-      telephone: '',
+      telephone: '+39 351 905 2755',
       email: 'info@studiodallatorre.it',
       openingHours: ['Mo-Sa 08:00-13:00', 'Mo-Sa 14:00-20:00'],
     },

@@ -388,9 +388,6 @@ useHead({
     { property: 'article:published_time', content: '2026-03-20' },
     { property: 'article:author', content: 'Studio Dalla Torre' },
   ],
-  link: [
-    { rel: 'canonical', href: 'https://www.studiodallatorre.it/blog/osteopatia-post-traumatica-prevenzione' },
-  ],
 })
 
 useSchemaOrg([
