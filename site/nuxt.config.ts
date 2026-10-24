@@ -111,6 +111,10 @@ export default defineNuxtConfig({
       },
       telephone: '+39 351 905 2755',
       email: 'info@studiodallatorre.it',
+      sameAs: [
+        'https://www.facebook.com/studiodallatorre/',
+        'https://www.instagram.com/studio_dallatorre/',
+      ],
       openingHours: ['Mo-Sa 08:00-13:00', 'Mo-Sa 14:00-20:00'],
     },
   },

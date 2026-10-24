@@ -14,6 +14,7 @@
             Centro di osteopatia a San Donà di Piave. Ci prendiamo cura del tuo benessere con
             trattamenti osteopatici personalizzati e ginnastica posturale.
           </p>
+          <SocialLinks />
         </div>
 
         <div class="footer-links">
